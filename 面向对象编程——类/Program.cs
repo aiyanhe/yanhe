@@ -14,6 +14,8 @@ namespace 面向对象编程__类
             bus.carName = "广龙日天大帝";
             bus.speed = 1000;
             bus.value = 10000000;
+            jeep je = new jeep();
+            je.Move();
 
             bus.Move();
             Console.ReadKey();
