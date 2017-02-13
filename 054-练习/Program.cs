@@ -54,7 +54,6 @@ namespace _054_练习
         public static long Digui(int num)
         {
             long sum = 1;
-            int i = 0;
             bool boom = true;
             for (int i = 1; i <= num; i++)
             {
