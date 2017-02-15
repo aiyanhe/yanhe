@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _015__接口
+namespace 静态static
 {
     class Program
     {
         static void Main(string[] args)
         {
-            bird bi = new bird();
-            bi.Fly();
-            bi.Move();
-            //fly D = new fly();接口无法被实例化
-            Console.ReadKey();
+
+            Fruit.GetName();
+            Fruit.size = 100;
         }
     }
 }

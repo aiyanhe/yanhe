@@ -10,8 +10,8 @@ namespace _011_派生类的构造函数
     {
         static void Main(string[] args)
         {
-            Woman yanhe = new Woman();
-            Woman tianyi = new Woman("爱言和","爱天依");
+            //Woman yanhe = new Woman();
+            Woman tianyi = new Woman("言和","天依");
             Console.ReadKey();
         }
     }

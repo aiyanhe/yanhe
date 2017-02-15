@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _015__接口
+namespace 接口
 {
-    interface Move
+    interface ITest
     {
-        void Move();
+        void GetMoney();
     }
 }

@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _015__接口
+namespace 单例模式
 {
     class Program
     {
         static void Main(string[] args)
         {
-            bird bi = new bird();
-            bi.Fly();
-            bi.Move();
-            //fly D = new fly();接口无法被实例化
+            //单例模式：保证该类只有一个实例化的对象
+            LLo.GetToolSingle().GetSum();
+            LLo.GetToolSingle().GetSum();//再次声明时，还是只有一个theTool;
             Console.ReadKey();
         }
     }
