@@ -14,7 +14,6 @@ namespace _015__接口
 
         {
             Console.WriteLine("fly接口被实现了");
-            //Console.WriteLine("fly接口被实现了");
         }
 
         public void Move()

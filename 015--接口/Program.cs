@@ -13,6 +13,7 @@ namespace _015__接口
             bird bi = new bird();
             bi.Fly();
             bi.Move();
+            //fly D = new fly();接口无法被实例化
             Console.ReadKey();
         }
     }
