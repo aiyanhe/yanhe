@@ -15,5 +15,9 @@ namespace _009_LINQ查询
         public float math { get; set; }
 
         public float english { get; set; }
+        public override string ToString()
+        {
+            return string.Format("name:{0} age:{1} Class:{2}yuwen:{3}math:{4}english:{5}",name,age,Class,yuwen,math,english);
+        }
     }
 }
