@@ -11,7 +11,11 @@ namespace _009_LINQ查询
         public int Sumyuwen { get; set; }
         public int SumMath { get; set; }
         public int SumEnglish { get; set; }
-        
+
+        public override string ToString()
+        {
+            return string.Format("Sumyuwen:{0},SumMath:{1}SumEnglish:{2}",Sumyuwen,SumMath,SumEnglish);
+        }
         
     }
 }
