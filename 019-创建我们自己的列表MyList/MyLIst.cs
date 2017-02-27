@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace _019_创建我们自己的列表MyList
 {
     class MyList<T>where T:IComparable//一个比较的接口
+                                      //限定T的范围为IComparable;
     {
-        
+
         private static T[] array;//建立一个T类型的数组
         private int count=0;
         private T temp;

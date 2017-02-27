@@ -34,6 +34,17 @@ namespace _006_匿名方法
             //这个方法的结果给，不但受到参数的控制，还受到ssssd变量的控制，结果不可控，容易出现编程问题，用的时候要谨慎；
 
 
+            //g => g.Update(location) 的意思是一个函数，把这个函数按照传统方法展开是这个样子     兰姆达表达式
+            //void Func(GeoService g) 
+            //{
+            //  g.Update(location)； 
+            //}
+            //  _geoServices.ForEach(g => g.Update(location)); 完全展开是这个样子
+            //foreach (GeoService g in _geoServices)
+            // {
+            //  g.Update(location);
+            //  }
+
 
 
             Console.ReadKey();
