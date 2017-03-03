@@ -17,16 +17,16 @@ namespace _009_LINQ查询
             new StudeGanden(){name ="乐正绫",age  =14,Class = "中V部",yuwen = 69,math = 85,english=57},
             new StudeGanden(){name ="乐正龙牙",age  =18,Class = "中V部",yuwen = 87,math = 86,english=88},
             new StudeGanden(){name ="心华",age  =17,Class = "中V部",yuwen = 75,math = 75,english=92},
-            new StudeGanden(){name ="星尘",age  =10,Class = "中V部",yuwen = 98,math = 79,english=85} 
+            new StudeGanden(){name ="星尘",age  =10,Class = "中V部",yuwen = 98,math = 79,english=85}
             };
             var sumGanden = new List<SumGanden>()
             {
-            new SumGanden(){ SumEnglish = 85,SumMath = 85,Sumyuwen=50} 
+            new SumGanden(){ SumEnglish = 85,SumMath = 85,Sumyuwen=50}
             };
             //使用LINQ做查询
             //第一种写法
             var res = from m in studeGanden//from后面设置查询的集合
-                      where m.age > 12&&m.english>80//where后面跟上查询的条件
+                      where m.age > 12 && m.english > 80//where后面跟上查询的条件
                       select m.name;//表示m的结果并返回
             //第二种写法
             var res2 = studeGanden.Where(Test1);
@@ -35,13 +35,13 @@ namespace _009_LINQ查询
             //LINQ 联合查询
             var res4 = from m in studeGanden
                        from k in sumGanden
-                       select new { studeGanden = m,sumGanden = k};
+                       select new { studeGanden = m, sumGanden = k };
             var res5 = from m in studeGanden
                        from k in sumGanden
                        where m.english > k.SumEnglish && m.math > k.SumMath && m.yuwen > k.Sumyuwen//查找三科及格的学员
                        select m.name;
             //LINQ 联合查询 的扩展方法
-            //var res6 = studeGanden.SelectMany();
+            var res6 = studeGanden.SelectMany(m => sumGanden, (m, k) => new { studeGanden = m,sumGanden = k}).Where(x =>x.studeGanden.english>x.sumGanden.SumEnglish&&x.studeGanden.math>x.sumGanden.SumMath&&x.studeGanden.yuwen>x.sumGanden.Sumyuwen);
 
 
 
