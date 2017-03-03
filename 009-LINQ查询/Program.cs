@@ -41,7 +41,7 @@ namespace _009_LINQ查询
                        where m.english > k.SumEnglish && m.math > k.SumMath && m.yuwen > k.Sumyuwen//查找三科及格的学员
                        select m.name;
             //LINQ 联合查询 的扩展方法
-            var res6 = studeGanden.SelectMany(,)
+            //var res6 = studeGanden.SelectMany();
 
 
 
