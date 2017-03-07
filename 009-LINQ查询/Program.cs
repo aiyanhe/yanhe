@@ -41,13 +41,25 @@ namespace _009_LINQ查询
                        where m.english > k.SumEnglish && m.math > k.SumMath && m.yuwen > k.Sumyuwen//查找三科及格的学员
                        select m.name;
             //LINQ 联合查询 的扩展方法
-            var res6 = studeGanden.SelectMany(m => sumGanden, (m, k) => new { studeGanden = m,sumGanden = k}).Where(x =>x.studeGanden.english>x.sumGanden.SumEnglish&&x.studeGanden.math>x.sumGanden.SumMath&&x.studeGanden.yuwen>x.sumGanden.Sumyuwen);
+            var res6 = studeGanden.SelectMany(m => sumGanden, (m, k) => new { studeGanden = m, sumGanden = k }).Where(x => x.studeGanden.english > x.sumGanden.SumEnglish && x.studeGanden.math > x.sumGanden.SumMath && x.studeGanden.yuwen > x.sumGanden.Sumyuwen);
+            //对查询的结果做排序 orderby(descending)
+            var res7 = from m in studeGanden
+                       where m.age > 12 && m.english > 80
+                       //orderby m.age//按照年龄由小到大排序
+                       //orderby m.age descending//按照年龄由大到小排序（descending是倒序）
+                       orderby m.age, m.Class//按照多个字段进行排序，如果字段的属性相同，就按照第二个属性排序
+                       select m.name;
+            //var res8=studeGanden.Where(m => m.age > 12 && m.english > 80).OrderBy(m=>m.age).OrderBy(m=>m.Class);//当用lambda表达式时，两个OrderBy会让它将结果排序两次，最后一次排序结果为最终结果
+            var res8 = studeGanden.Where(m => m.age > 12 && m.english > 80).OrderBy(m => m.age).ThenBy(m => m.Class);//当用lambda表达式时,OrderBy接一个ThenBy时，就会接着排序
+
+            //5.join on 集合联合
+            var res9 = from m in studeGanden
+                       join k in sumGanden on m.english equals k.SumEnglish//on接两个列表的条件，两个列表条件相同的成员才会被组合一起
+                       where m.age > 8//符合On条件的成员的判断条件
+                       select new { studeGanden = m, sumGanden = k };//结果
 
 
-
-
-
-            foreach (var item in res5)
+            foreach (var item in res9)
             {
                 Console.WriteLine(item);
             }
