@@ -21,7 +21,8 @@ namespace _009_LINQ查询
             };
             var sumGanden = new List<SumGanden>()
             {
-            new SumGanden(){ SumEnglish = 85,SumMath = 85,Sumyuwen=50}
+            new SumGanden(){ SumEnglish = 85,SumMath = 85,Sumyuwen=50},
+            new SumGanden(){ SumEnglish = 90,SumMath = 88,Sumyuwen=92}
             };
             //使用LINQ做查询
             //第一种写法
@@ -42,6 +43,9 @@ namespace _009_LINQ查询
                        select m.name;
             //LINQ 联合查询 的扩展方法
             var res6 = studeGanden.SelectMany(m => sumGanden, (m, k) => new { studeGanden = m, sumGanden = k }).Where(x => x.studeGanden.english > x.sumGanden.SumEnglish && x.studeGanden.math > x.sumGanden.SumMath && x.studeGanden.yuwen > x.sumGanden.Sumyuwen);
+            //反编译如下
+            //var enumerable = source.SelectMany(((Func<StudeGanden, IEnumerable<SumGanden>>)(m => sumGanden)), (<> c.<> 9__0_1 ?? (<> c.<> 9__0_1 = new Func<StudeGanden, SumGanden, <>f__AnonymousType0 < StudeGanden, SumGanden >> (<> c.<> 9.< Main > b__0_1)))).Where(<> c.<> 9__0_2 ?? (<> c.<> 9__0_2 = new Func<<> f__AnonymousType0<StudeGanden, SumGanden>, bool > (<> c.<> 9.< Main > b__0_2)));
+
             //对查询的结果做排序 orderby(descending)
             var res7 = from m in studeGanden
                        where m.age > 12 && m.english > 80
@@ -59,7 +63,18 @@ namespace _009_LINQ查询
                        select new { studeGanden = m, sumGanden = k };//结果
 
 
-            foreach (var item in res9)
+
+            //6，分组查询 into groups(把武林高手按照所学功夫分类，看一下哪个功夫修炼的人数最多)
+            var res10 = from k in studeGanden
+                        join m in sumGanden on k.english equals m.SumEnglish
+                        into groups
+                        orderby groups.Count()
+                        select new { studeGanden = k, count = groups.Count() };
+
+
+
+
+            foreach (var item in res6)
             {
                 Console.WriteLine(item);
             }
