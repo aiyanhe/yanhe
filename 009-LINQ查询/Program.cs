@@ -71,6 +71,11 @@ namespace _009_LINQ查询
                         orderby groups.Count()
                         select new { studeGanden = k, count = groups.Count() };
 
+            //8.量词操作符 any all 判断集合中是否满足某个条件
+            bool resb = studeGanden.Any(m=>m.age <18);//判断集合中是否有满足条件的成员，返回值为Bool;
+            Console.WriteLine(resb);
+            bool resAll = studeGanden.All(m=>m.age<18);//判断集合中是否所有成员都满足条件，返回值为Bool;
+            Console.WriteLine(resAll);
 
 
 
