@@ -32,6 +32,8 @@ namespace 字典
                 Console.WriteLine(item.Key+":"+item.Value);
             }
             Console.ReadKey();
+
+
             dic.Clear();
         }
     }
