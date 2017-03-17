@@ -8,5 +8,11 @@ namespace _010__反射和特性
 {
     public class MyClass
     {
+        public int num = 100;
+        public void Num()
+        {
+            Console.WriteLine("sjkagf");
+
+        }
     }
 }
