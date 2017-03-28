@@ -21,10 +21,19 @@ namespace _022__socket编程_TCP协议
             tcpServer.Bind(point);//向操作系统申请一个可用的ip跟端口号用来做通信
             //3,开始监听（等待客户端连接）
             tcpServer.Listen(100);//参数是最大连接数
-            Socket clientScoket = tcpServer.Accept();
+            Console.WriteLine("开始监听");
+            Socket clientScoket = tcpServer.Accept();//暂停当前线程，直到有一个客户端连接过来，之后进行下面的代码
+            Console.WriteLine("一个客户端连接过来了");
             string message = "hello";
             byte[] data = Encoding.UTF8.GetBytes(message);//对字符串做编码，得到一个字符串的字节数组
             clientScoket.Send(data);
+            Console.WriteLine("向客户端发送了一条数据");
+
+            byte[] data2 = new byte[1024];
+            int length = clientScoket.Receive(data2);
+            string message2 = Encoding.UTF8.GetString(data2,0,length);
+            Console.WriteLine("接收到了一个从客户端发送过来的消息"+message2);
+            Console.ReadKey();
         }
     }
 }
