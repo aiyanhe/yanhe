@@ -15,6 +15,7 @@ namespace _022__socket编程_TCP协议
             //1，创建socket
             Socket tcpServer = new Socket
             (AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+                                    //Ip4                            
             //2,绑定ip跟端口号 192.168.1.101
             IPAddress ipaddress = new IPAddress(new byte[]{192,168,1,101});
             EndPoint point = new IPEndPoint(ipaddress,7788);//ipendpoint是对ip+端口做了一层封装的类
@@ -28,6 +29,7 @@ namespace _022__socket编程_TCP协议
             byte[] data = Encoding.UTF8.GetBytes(message);//对字符串做编码，得到一个字符串的字节数组
             clientScoket.Send(data);
             Console.WriteLine("向客户端发送了一条数据");
+
 
             byte[] data2 = new byte[1024];
             int length = clientScoket.Receive(data2);
