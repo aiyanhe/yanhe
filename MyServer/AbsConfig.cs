@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyServer
+namespace MyConfig
 {
     public class AbsConfig
     {
@@ -24,7 +24,7 @@ namespace MyServer
             //配置表的扩展名
             public string Extension;
             //默认配置表的类型
-            public E_ConfigType ConfigType = E_ConfigType.None;
+            public E_ConfigType ConfigType = E_ConfigType.XML;
 
             public string GetPath<T>()
             {
@@ -51,9 +51,13 @@ namespace MyServer
         protected virtual void Init()//默认相对路径和扩展名赋值
         {
             Data.Path = "/Xml/";
-            Data.Extension = "/.xml/";
+            Data.Extension = ".xml";
         }
 
+        public AbsConfig()
+        {
+            Init();
+        }
         protected static T GetConfig<T>() where T : AbsConfig,new()
         //where T：new()指明了创建T的实例时应该具有构造函数。正常时是不能创建实例的
         {
@@ -62,11 +66,40 @@ namespace MyServer
             sw.Start();
             //加载配置文件，进行反序列化变成对象
 
-            config = ConfigManager
-
-
-
-
+            config = ConfigManager.Instance.FormatConfig<T>(config.GetFileName<T>(), config.Data.ConfigType);
+            sw.Stop();
+            float loadTime = sw.ElapsedMilliseconds;
+            Console.WriteLine("加载文件：{0}，消耗了{1}毫秒时间",typeof(T).Name,loadTime);
+            return config;
         }
     }
+
+    public abstract class AbsConfig<T> : AbsConfig where T : AbsConfig, new()
+    {
+
+        private static T config;
+        public static T Config
+        {
+            get 
+            {
+
+                if (config==null)
+                {
+                    config = GetConfig<T>();
+                }
+                return config;
+            }
+        }
+    }
+
+    public abstract class XmlConfig<T> : AbsConfig<T> where T : AbsConfig, new()
+    {
+        protected override void  Init()
+        {
+            base.Init();
+            Data.ConfigType = E_ConfigType.XML;
+        }
+    
+    }
+
 }

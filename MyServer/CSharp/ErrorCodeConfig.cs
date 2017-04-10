@@ -21,7 +21,8 @@ namespace MyConfig {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class ErrorCodeConfig {
+    public partial class ErrorCodeConfig
+    {
         
         private ErrorCodeConfigContent[] contentField;
         

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyServer
+namespace MyConfig
 {
-    class ConfigManager
+    public  class ConfigManager
     {
         private static ConfigManager _instance;
         static ConfigManager()//静态构造函数，不懂的话可以去“中级视频/构造函数”那边看下
@@ -17,7 +18,7 @@ namespace MyServer
         protected ConfigManager()//构造函数
         {
         }
-        internal static ConfigManager Instance
+        public  static ConfigManager Instance
         {
             get
             {
@@ -38,10 +39,88 @@ namespace MyServer
         //加载完成的回调
         protected Action Finished;
 
-        public void Init(Action<int , int >progress = null,Action Finished = null)
+        public void Init(Action<int, int> progress = null, Action Finished = null)
         {
-            LoadConfigs();
+            LoadConfigs(DefaultConfigs, progress);
 
+            if (IsPreLoad)
+            {
+                LoadConfigs(AsnycConfigs, progress, Finished);
+            }
+            else
+            {
+                if (Finished != null)
+                {
+                    Finished();
+                }
+            }
+
+        }
+        /// 加载一组配置文件
+        public void LoadConfigs(List<Type> configs, Action<int, int> progress = null, Action Finished = null)
+        {
+            if (configs == null || configs.Count == 0)
+            {
+                if (Finished != null)
+                {
+                    Finished();
+                }
+                return;
+            }
+            int count = configs.Count;
+            int index = 1;
+
+            foreach (var item in configs)
+            {
+                LoadConfig(item);
+                if (progress!=null)
+                {
+                    progress(index,count);
+                }
+                index++;
+            }
+            if (Finished!=null)
+            {
+                Finished();
+            }
+        }
+        //加载一个配置文件
+        private void LoadConfig(Type item)
+        {
+
+            var c = item.GetProperty("",~BindingFlags.DeclaredOnly);
+
+            if (c!=null)
+            {
+                c.GetGetMethod().Invoke(null,null);
+            }
+        }
+
+        /// 暴露出去调用反序列化的方法*
+        public T FormatConfig<T>(string fileName,AbsConfig.E_ConfigType type)where T:AbsConfig,new()
+        {
+
+            switch (type)
+            {
+                case AbsConfig.E_ConfigType.XML:
+                    return FormatXMLConfig<T>(fileName);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("type",type,null);
+                    break;
+            }
+        }
+
+        private T FormatXMLConfig<T>(string fileName)where T:AbsConfig
+        { 
+        
+            //调用xml序列化
+            return XMLHelper.FormatConfig<T>(GetPath(fileName));
+        }
+        protected string GetPath(string fileName)
+        {
+
+            return ResPath + fileName;
         }
 
     }
