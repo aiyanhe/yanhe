@@ -112,8 +112,8 @@ namespace MyConfig
                 case AbsConfig.E_ConfigType.Json:
                     return FormatJsonConfig<T>(fileName);
                     break;
-                case AbsConfig.E_ConfigType.Counts:
-                    return FormatCountsConfig<T>(fileName);
+                case AbsConfig.E_ConfigType.Consten:
+                    return FormatConstenConfig<T>(fileName);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("type",type,null);
@@ -129,15 +129,16 @@ namespace MyConfig
             //调用xml序列化
             return XMLHelper.FormatConfig<T>(GetPath(fileName));
         }
-        private T FormatCountsConfig<T>(string fileName) where T : AbsConfig, new()
-        {
-            throw new NotImplementedException();
-        }
-
         private T FormatJsonConfig<T>(string fileName) where T : AbsConfig, new()
         {
-            throw new NotImplementedException();
+            return JsonHelp.FormatConfig<T>(GetPath(fileName));
         }
+        private T FormatConstenConfig<T>(string fileName) where T : AbsConfig, new()
+        {
+            return ConstenHelp.FormatConfig<T>(GetPath(fileName));
+        }
+
+       
         protected string GetPath(string fileName)
         {
 

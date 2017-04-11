@@ -14,7 +14,7 @@ namespace MyConfig
             None,
             XML,
             Json,
-            Counts
+            Consten
         }
 
         public class ConfigData
@@ -105,4 +105,23 @@ namespace MyConfig
     
     }
 
+    public abstract class jsonConfig<T> : AbsConfig<T> where T : AbsConfig, new()//注意：jsonConfig<T> 继承于AbsConfig<T>
+    {
+        protected override void Init()
+        {
+            base.Init();
+            Data.ConfigType = E_ConfigType.Json;
+        }
+
+    }
+
+    public abstract class Constenfig<T> : AbsConfig<T> where T : AbsConfig, new()//注意：jsonConfig<T> 继承于AbsConfig<T>
+    {
+        protected override void Init()
+        {
+            base.Init();
+            Data.ConfigType = E_ConfigType.Consten;
+        }
+
+    }
 }
