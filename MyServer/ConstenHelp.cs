@@ -11,6 +11,7 @@ namespace MyConfig
     {
         void Read(string name);
     }
+
     public  class ConstenHelp
     {
 
