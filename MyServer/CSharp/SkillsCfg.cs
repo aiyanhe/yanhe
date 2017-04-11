@@ -21,13 +21,13 @@ namespace MyConfig {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class ErrorCodeConfig {
+    public partial class SkillsCfg {
         
-        private ErrorCodeConfigContent[] contentField;
+        private SkillsCfgContent[] contentField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Content")]
-        public ErrorCodeConfigContent[] Content {
+        public SkillsCfgContent[] Content {
             get {
                 return this.contentField;
             }
@@ -43,7 +43,7 @@ namespace MyConfig {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class ErrorCodeConfigContent {
+    public partial class SkillsCfgContent {
         
         private int idField;
         
@@ -62,10 +62,6 @@ namespace MyConfig {
         private string intoGameNameField;
         
         private int killsForUserIdField;
-        
-        private int localField;
-        
-        private bool localFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -163,28 +159,6 @@ namespace MyConfig {
             }
             set {
                 this.killsForUserIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Local {
-            get {
-                return this.localField;
-            }
-            set {
-                this.localField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LocalSpecified {
-            get {
-                return this.localFieldSpecified;
-            }
-            set {
-                this.localFieldSpecified = value;
             }
         }
     }

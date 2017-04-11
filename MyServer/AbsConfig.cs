@@ -12,7 +12,9 @@ namespace MyConfig
         public enum E_ConfigType//配置表的类型
         {
             None,
-            XML
+            XML,
+            Json,
+            Counts
         }
 
         public class ConfigData
@@ -24,17 +26,17 @@ namespace MyConfig
             //配置表的扩展名
             public string Extension;
             //默认配置表的类型
-            public E_ConfigType ConfigType = E_ConfigType.XML;
+            public E_ConfigType ConfigType = E_ConfigType.None;
 
             public string GetPath<T>()
             {
                 var type = typeof(T);//typeof(T);返回一个T类型
-                if (string.IsNullOrEmpty(Name))//如果 value 参数为 null 或空字符串 ("")，则为 true；否则为 false。
-                    //当Name为空时，赋值于它
+                if (string.IsNullOrEmpty(Name))//string.IsNullOrEmpty（value）如果 value 参数为 null 或空字符串 ("")，则为 true；否则为 false。
+                                               //当Name为空时，赋值于它
                 {
-                    Name = type.Name;
+                    Name = type.Name;//默认为类名为Xml的名称
                 }
-                return Path + Name + Extension;//路径+文件名+扩展名=绝对路径
+                return Path + Name + Extension;//路径+文件名+扩展名
             }
         }
 
@@ -43,7 +45,7 @@ namespace MyConfig
         //[NonSerializable] 应用于属性无效，能用于类，结构体等
         public ConfigData Data = new ConfigData();
 
-        private string GetFileName<T>()//获取绝对路径
+        private string GetFileName<T>()//获取路径+文件名+扩展名
         {
             return Data.GetPath<T>();
         }
@@ -54,7 +56,7 @@ namespace MyConfig
             Data.Extension = ".xml";
         }
 
-        public AbsConfig()
+        public AbsConfig()//构造函数
         {
             Init();
         }
@@ -74,15 +76,16 @@ namespace MyConfig
         }
     }
 
-    public abstract class AbsConfig<T> : AbsConfig where T : AbsConfig, new()
+    public abstract class AbsConfig<T> : AbsConfig where T : AbsConfig, new()  //注意：AbsConfig<T> 继承于AbsConfig
+     //abstract修饰类，会使这个类成为一个抽象类，这个类将不能生成对象实例，但可以做为对象变量声明的类型，也就是编译时类型，抽象类就像当于一类的半成品，需要子类继承并覆盖其中的抽象方法。
+
     {
 
         private static T config;
-        public static T Config
+        public static T Config//属性
         {
             get 
             {
-
                 if (config==null)
                 {
                     config = GetConfig<T>();
@@ -92,7 +95,7 @@ namespace MyConfig
         }
     }
 
-    public abstract class XmlConfig<T> : AbsConfig<T> where T : AbsConfig, new()
+    public abstract class XmlConfig<T> : AbsConfig<T> where T : AbsConfig, new()//注意：XmlConfig<T> 继承于AbsConfig<T>
     {
         protected override void  Init()
         {
