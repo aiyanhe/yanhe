@@ -89,7 +89,7 @@ namespace MyConfig
         {
 
             var c = item.GetProperty("Config", ~BindingFlags.DeclaredOnly);//item.GetProperty（）使用指定的绑定约束搜索指定属性。
-                                         //因为有个"~"反的意思，所以仅搜索父类(仅让其搜索同一级别的属性)     //BindingFlags.DeclaredOnly，仅搜索 Type 上声明的成员，而不搜索子类
+                                                                           //因为有个"~"反的意思，所以仅搜索父类(仅让其搜索同一级别的属性)     //BindingFlags.DeclaredOnly，指定只应考虑在所提供类型的层次结构级别上声明的成员。不考虑继承成员。
 
             if (c!=null)
             {
