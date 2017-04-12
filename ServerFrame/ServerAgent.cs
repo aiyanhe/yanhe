@@ -65,15 +65,36 @@ namespace ServerFrame
             Console.WriteLine("有客户端连接上来了");
             //TODO  保存客户信息 
             UserToken use = new UserToken();
-
-
+            use.CloseProcess = ClientClose;
+            use.socket = saea.AcceptSocket;
+            
             //信号量减一 
             semaphore.WaitOne();
             //TODO  通知应用层有客户端计接入 
-            //TODO  启动该客户端消息接收 
+
+            //启动该客户端消息接收 
+            use.StatrRecive();
 
             StartListen();//重新开始监听
         }
+
+        private void ClientClose(UserToken ut, string error)//在有错误时发的，停止客户端连接等处理
+        {
+            if (ut!=null)
+            {
+                lock (ut)//加锁，防止多个线程同时调用一个方法
+                {
+                    ut.CloseToken();
+                }
+                //todo 通知应用层有客户端断开
+
+
+                //一个客户端离开，信号量加1
+                semaphore.Release();
+            }
+            
+        }
+
     }
 
 }
