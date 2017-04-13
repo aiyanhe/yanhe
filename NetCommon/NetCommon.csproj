@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteArrary.cs" />
+    <Compile Include="LengthEncoding.cs" />
+    <Compile Include="MessageEncoding.cs" />
     <Compile Include="NetModle.cs" />
+    <Compile Include="NetworkDelgate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

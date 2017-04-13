@@ -187,14 +187,19 @@ namespace NetCommon
             ms.Position = 0;
 
         }
-
+        /// <summary>
+        /// 将当前流的二进制克隆转成Byte[]输出
+        /// </summary>
+        /// <returns></returns>
         public Byte[] GetCopyBytes()
         {
             byte[] buffer = new byte[ms.Length];
             Buffer.BlockCopy(ms.GetBuffer(),0,buffer,0,Length);
             return buffer;
         }
-
+        /// <summary>
+        /// 关闭当前流
+        /// </summary>
         public void Close()
         {
             ms.Dispose();

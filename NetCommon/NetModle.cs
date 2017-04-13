@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetCommon
 {
+    /// <summary>
+    /// 消息的编码模式
+    /// </summary>
     public enum Protocol : byte
     {
         /// <summary>
@@ -22,7 +25,9 @@ namespace NetCommon
         BackPack
 
     }
-
+    /// <summary>
+    /// 消息的模块
+    /// </summary>
     class NetModle
     {
         /// <summary>
