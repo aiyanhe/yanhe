@@ -99,7 +99,7 @@ namespace ServerFrame
         /// <summary>
         /// 拷贝接收缓存数据
         /// </summary>
-        partial void Recive(SocketAsyncEventArgs e)
+         private void Recive(SocketAsyncEventArgs e)
         {
             byte[] mby = new byte[e.BytesTransferred];
             Buffer.BlockCopy(e.Buffer, 0, mby, 0, e.BytesTransferred);
@@ -109,7 +109,7 @@ namespace ServerFrame
         /// 把接收数据添加到缓存，然后进行处理缓存数据
         /// </summary>
         /// <param name="mby"></param>
-        partial void Recive(byte[] mby)
+         private void Recive(byte[] mby)
         {
             Recath.AddRange(mby);
             if (isRecive == false)
@@ -174,7 +174,9 @@ namespace ServerFrame
             }
 
         }
-
+        /// <summary>
+        /// 从队列中加载发送消息到SendSAEA缓冲区
+        /// </summary>
         private void OnSend()
         {
             if (queue.Count==0)//队列中没有想要发送的消息
