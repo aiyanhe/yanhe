@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace NetCommon
 {
-    class LengthEncoding
+    public  class LengthEncoding
     {
         /// <summary>
         /// 消息长度编码，就是在我们消息前面在加入一个长度
         /// </summary>
-        public byte[] Encoad(byte[] buff)
+        public static byte[] Encoad(byte[] buff)
         {
             ByteArrary ba = new ByteArrary();
             ba.Write(buff.Length);//先读入消息长度
@@ -23,7 +23,7 @@ namespace NetCommon
         /// <summary>
         /// 消息长度解码
         /// </summary>
-        public byte[] Dncoad(ref List<byte> buff)
+        public static byte[] Dncoad(ref List<byte> buff)
         {
             if (buff.Count < 4)//连组成消息头的字节数量都不够
             {

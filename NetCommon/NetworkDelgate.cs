@@ -13,7 +13,7 @@ namespace NetCommon
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public delegate byte[] MessageEncoad(object value);
+        public  delegate byte[] MessageEncoad(object value);
         /// <summary>
         /// 消息解码
         /// </summary>
@@ -32,6 +32,6 @@ namespace NetCommon
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public delegate byte[] LengthDncoad( ref List<byte > value);
+        public delegate byte[] LengthDncoad( ref List<byte> value);
     }
 }

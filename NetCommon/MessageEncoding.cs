@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCommon
 {
-    class MessageEncoding
+   public class MessageEncoding
     {
         /// <summary>
         /// 序列化，消息编码
@@ -14,7 +14,7 @@ namespace NetCommon
         /// <param name="?"></param>
         /// <returns></returns>
 
-        public byte[] Encoad(object value)
+        public static byte[] Encoad(object value)
         { 
         
             NetModle nem = (NetModle)value;//将object类型消息转成标准的消息模块
@@ -34,7 +34,7 @@ namespace NetCommon
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public object Dncoad(byte[] value)
+        public static object Dncoad(byte[] value)
         {
             NetModle nem = new NetModle();
             ByteArrary ba = new ByteArrary(value);

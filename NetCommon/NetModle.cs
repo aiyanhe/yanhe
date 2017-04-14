@@ -28,7 +28,7 @@ namespace NetCommon
     /// <summary>
     /// 消息的模块
     /// </summary>
-    class NetModle
+    public  class NetModle
     {
         /// <summary>
         /// 模块号

@@ -9,7 +9,7 @@ namespace ServerFrame
     /// <summary>
     /// 记录用户的行为
     /// </summary>
-    class AbsHandlerCenter
+    public abstract class AbsHandlerCenter
     {
         /// <summary>
         /// 接收用户消息

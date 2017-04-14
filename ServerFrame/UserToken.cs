@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetCommon;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -10,7 +11,7 @@ namespace ServerFrame
     /// <summary>
     /// 一个UserToken类代表一个客户端
     /// </summary>
-    class UserToken
+   public class UserToken
     {
         public Socket socket;
 
@@ -49,6 +50,11 @@ namespace ServerFrame
         /// 是否发送消息
         /// </summary>
         public bool isSend = false;
+
+        /// <summary>
+        /// 服务器默认配置声明的对象
+        /// </summary>
+        public static ServerSetting Setting;
 
         public UserToken()
         {
@@ -121,15 +127,50 @@ namespace ServerFrame
 
         private void OnRecive()
         {
-            //todo 处理缓存数据 进行 有长度编码做长度表
+            byte[] bt;
+            //处理缓存数据 进行 有长度解码做长度表
+            if (Setting.LengthDncoad==null)
+            {
+                //无长度解码器
+                if (Recath.Count==0)//没有缓存数据
+                {
+                    isRecive = false;
+                    return;
+                }
+                bt = Recath.ToArray();
+                Recath.Clear();
+                
+            }
+            else
+            {
+                bt = Setting.LengthDncoad(ref Recath);
+                if (bt==null)
+                {
+                    Console.WriteLine("消息不全，无法进行长度解码");
+                    isRecive = false;
+                    return;
+                }
+            }
 
             //todo （可选）消息的解密
 
             //todo （可选）消息的解压
 
-            //todo （必须）消息的解码-反序列，从二进制变成对象
+            // （必须）消息的解码-反序列，从二进制变成对象
+            object ob;
+            if (Setting.MessageDncoad==null)
+            {
+                throw new Exception("必须有消息解码器");
+            }
+            else
+            {
+                 ob= Setting.MessageDncoad(bt);
+            }
+            // 把数据通知应用层
+            Setting.Center.ReceiveMessage(this,ob);
 
-            //todo 把数据通知应用层
+
+
         }
         /// <summary>
         /// 开始挂起监听
@@ -138,8 +179,9 @@ namespace ServerFrame
         {
             try
             {
-                Console.WriteLine("开始接收数据");
-                bool t = socket.AcceptAsync(ReceSAEA);//AcceptAsync 开始一个异步操作来接受一个传入的连接尝试。
+                Console.WriteLine("开启用户{0}接收数据",socket.RemoteEndPoint);
+                socket.Listen(100);
+                bool t = socket.ReceiveAsync(ReceSAEA);//ReceiveAsync 开始一个异步请求以便从连接的 System.Net.Sockets.Socket 对象中接收数据。
                 if (t == false)
                 {
                     ProcessRece(ReceSAEA);
@@ -202,7 +244,7 @@ namespace ServerFrame
         }
 
         /// <summary>
-        ///  应用层进行发数据的接口
+        ///  应用层进行发数据的接口(接收byte[])
         /// </summary>
         public void Send(byte[] bt)
         { 
@@ -222,6 +264,28 @@ namespace ServerFrame
             }
             OnSend();
         }
+
+        /// <summary>
+        ///  应用层进行发数据的接口(接收NetModle)
+        /// </summary>
+        public void Send(NetModle nm)//如果用户想要发送的消息时NetModle模块时，先进行消息编码和长度编码
+        {
+            if (Setting.MessageEncoad==null)
+            {
+                isSend = false;
+                throw new Exception("消息编码必须存在");
+            }
+            byte[] bt = Setting.MessageEncoad(nm);
+            //todo 消息压缩，可选
+            //todo 消息加密，可选
+            if (Setting.LengthEncoad!=null)
+            {
+                bt = Setting.LengthEncoad(bt);
+            }
+            Send(bt);
+
+        }
+
         #endregion
         /// <summary>
         /// 客户端里面的关闭功能
@@ -245,7 +309,7 @@ namespace ServerFrame
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message.ToString());
+                Console.WriteLine(e.Message);
                 throw;
             }
         

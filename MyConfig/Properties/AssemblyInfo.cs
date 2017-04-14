@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("ConsoleApplication4")]
+[assembly: AssemblyTitle("MyServer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ConsoleApplication4")]
+[assembly: AssemblyProduct("MyServer")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("c829b123-1344-40be-b974-084d54a0287f")]
+[assembly: Guid("b6c8089b-d3de-44c0-a31f-6a194a30a2ba")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
