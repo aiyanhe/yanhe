@@ -63,6 +63,9 @@ namespace ServerFrame
             Recath = new List<byte>();
             ReceSAEA.Completed += ReceSAEA_Completed;
             SendSAEA.Completed += SendSAEA_Completed;
+
+            //设置数据接收的缓存
+            ReceSAEA.SetBuffer(new byte[1024],0,1024);
         }
 
         private void ReceSAEA_Completed(object sender, SocketAsyncEventArgs e)
@@ -143,6 +146,7 @@ namespace ServerFrame
             }
             else
             {
+                //有长度解码器
                 bt = Setting.LengthDncoad(ref Recath);
                 if (bt==null)
                 {
@@ -168,8 +172,7 @@ namespace ServerFrame
             }
             // 把数据通知应用层
             Setting.Center.ReceiveMessage(this,ob);
-
-
+            OnRecive();//仅仅是为了归位isRecive
 
         }
         /// <summary>
@@ -180,9 +183,8 @@ namespace ServerFrame
             try
             {
                 Console.WriteLine("开启用户{0}接收数据",socket.RemoteEndPoint);
-                socket.Listen(100);
                 bool t = socket.ReceiveAsync(ReceSAEA);//ReceiveAsync 开始一个异步请求以便从连接的 System.Net.Sockets.Socket 对象中接收数据。
-                if (t == false)
+                if (!t)
                 {
                     ProcessRece(ReceSAEA);
                 }
