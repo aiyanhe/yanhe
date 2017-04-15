@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ServerFrame
 {
 
-    class ServerAgent
+   public class ServerAgent
     {
         /// <summary>
         /// 服务器Socket
@@ -28,7 +28,7 @@ namespace ServerFrame
         /// </summary>
         public Semaphore semaphore;
 
-        private ServerAgent()
+        public ServerAgent()
         {
             socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
 
@@ -66,7 +66,7 @@ namespace ServerFrame
         public void ListenTheUser(SocketAsyncEventArgs saea)
         {
             Console.WriteLine("有客户端连接上来了");
-            //TODO  保存客户信息 
+            // 保存客户信息 
             UserToken use = new UserToken();
             use.CloseProcess = ClientClose;
             use.socket = saea.AcceptSocket;

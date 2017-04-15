@@ -51,7 +51,7 @@
     <Fakes Include="Fakes\MyServer.fakes" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyServer\MyConfig.csproj">
+    <ProjectReference Include="..\MyConfig\MyConfig.csproj">
       <Project>{b6c8089b-d3de-44c0-a31f-6a194a30a2ba}</Project>
       <Name>MyConfig</Name>
     </ProjectReference>

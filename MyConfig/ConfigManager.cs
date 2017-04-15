@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyConfig
 {
-    public class ConfigManager
+    public  class ConfigManager
     {
         private static ConfigManager _instance;
         static ConfigManager()//静态构造函数，不懂的话可以去“中级视频/构造函数”那边看下
@@ -18,7 +18,7 @@ namespace MyConfig
         protected ConfigManager()//构造函数
         {
         }
-        public static ConfigManager Instance
+        public  static ConfigManager Instance
         {
             get
             {
@@ -73,13 +73,13 @@ namespace MyConfig
             foreach (var item in configs)//逐个抽出预加载文件
             {
                 LoadConfig(item);
-                if (progress != null)
+                if (progress!=null)
                 {
-                    progress(index, count);
+                    progress(index,count);
                 }
                 index++;
             }
-            if (Finished != null)
+            if (Finished!=null)
             {
                 Finished();
             }
@@ -89,19 +89,19 @@ namespace MyConfig
         {
 
             var c = item.GetProperty("Config", ~BindingFlags.DeclaredOnly);//item.GetProperty（）使用指定的绑定约束搜索指定属性。
-            //因为有个"~"反的意思，所以仅搜索父类(仅让其搜索同一级别的属性)     //BindingFlags.DeclaredOnly，指定只应考虑在所提供类型的层次结构级别上声明的成员。不考虑继承成员。
+                                                                           //因为有个"~"反的意思，所以仅搜索父类(仅让其搜索同一级别的属性)     //BindingFlags.DeclaredOnly，指定只应考虑在所提供类型的层次结构级别上声明的成员。不考虑继承成员。
 
-            if (c != null)
+            if (c!=null)
             {
                 //将预加载文件序列化和反序列化为一个对象；
-                c.GetGetMethod().Invoke(null, null);// GetGetMethod()：返回一个MethodInfo对象,表示此属性的公共 get 访问器，
-                //Invoke():返回一个对象，包含被调用方法的返回值，如果调用的是构造函数，则为 null。
-                //这里的话就是执行 public static T Config {get {if (config == null) { config = GetConfig<T>(); } return config; }}
+                c.GetGetMethod().Invoke(null,null);// GetGetMethod()：返回一个MethodInfo对象,表示此属性的公共 get 访问器，
+                                                   //Invoke():返回一个对象，包含被调用方法的返回值，如果调用的是构造函数，则为 null。
+                                                   //这里的话就是执行 public static T Config {get {if (config == null) { config = GetConfig<T>(); } return config; }}
             }
         }
 
         /// 暴露出去调用反序列化的方法
-        public T FormatConfig<T>(string fileName, AbsConfig.E_ConfigType type) where T : AbsConfig, new()
+        public T FormatConfig<T>(string fileName,AbsConfig.E_ConfigType type)where T:AbsConfig,new()
         {
 
             switch (type)
@@ -116,16 +116,16 @@ namespace MyConfig
                     return FormatConstenConfig<T>(fileName);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("type", type, null);
+                    throw new ArgumentOutOfRangeException("type",type,null);
                     break;
             }
         }
 
 
 
-        private T FormatXMLConfig<T>(string fileName) where T : AbsConfig
-        {
-
+        private T FormatXMLConfig<T>(string fileName)where T:AbsConfig
+        { 
+        
             //调用xml序列化
             return XMLHelper.FormatConfig<T>(GetPath(fileName));
         }
@@ -138,7 +138,7 @@ namespace MyConfig
             return ConstenHelp.FormatConfig<T>(GetPath(fileName));
         }
 
-
+       
         protected string GetPath(string fileName)
         {
 

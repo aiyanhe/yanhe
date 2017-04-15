@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NetCommon;
-
 namespace ServerFrame
 {
     /// <summary>
@@ -28,10 +27,10 @@ namespace ServerFrame
         public AbsHandlerCenter Center;
 
        //消息编码
-        public NetCommon.NetworkDelgate.MessageDncoad MessageDncoad;
-        public NetCommon.NetworkDelgate.MessageEncoad MessageEncoad;
+        public NetworkDelgate.MessageDncoad MessageDncoad;
+        public NetworkDelgate.MessageEncoad MessageEncoad;
        //长度编码
-        public NetCommon.NetworkDelgate.LengthDncoad LengthDncoad;
-        public NetCommon.NetworkDelgate.LengthEncoad LengthEncoad;
+        public NetworkDelgate.LengthDncoad LengthDncoad;
+        public NetworkDelgate.LengthEncoad LengthEncoad;
     }
 }
