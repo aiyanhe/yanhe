@@ -60,5 +60,7 @@ namespace NetCommon
         /// <param name="progress"></param>
         /// <returns></returns>
         public delegate byte[] CompressDecode(byte[] buff, ICodeProgress progress = null);
+
+       
     }
 }

@@ -5,6 +5,7 @@ using SevenZip.Compression.LZMA;
 
 namespace NetCommon
 {
+    
     /// <summary>
     /// 压缩，解压
     /// </summary>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetCommon
 {
+    
     /// <summary>
     /// 加密解密
     /// </summary>

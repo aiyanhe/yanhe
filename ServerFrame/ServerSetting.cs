@@ -41,4 +41,5 @@ namespace ServerFrame
         public NetworkDelgate.CompressEncode CompressEncode;
         public NetworkDelgate.CompressDecode CompressDecode;
     }
+   
 }

@@ -9,6 +9,7 @@ using NetCommon;
 
 namespace MyServer
 {
+    
     class Program
     {
         public static void SettingServer()
