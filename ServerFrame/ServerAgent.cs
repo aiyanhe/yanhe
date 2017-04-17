@@ -28,9 +28,25 @@ namespace ServerFrame
         /// </summary>
         public Semaphore semaphore;
 
+        /// <summary>
+        /// 用户token缓存
+        /// </summary>
+        public UserToKenCache Cache;
+
+        private SocketAsyncEventArgs saea;
+
         public ServerAgent()
         {
-            socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
+            try
+            {
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
 
         }
         /// <summary>
@@ -38,15 +54,35 @@ namespace ServerFrame
         /// </summary>
         public void StartServer(ServerSetting sers)
         {
-            socket.Bind(new IPEndPoint(IPAddress.Any, sers.point));//将默认配置对应上
-            semaphore = new Semaphore(sers.MaxAccept,sers.MaxAccept);//将默认配置对应上
-            socket.Listen(100);
-            StartListen();
-            Console.WriteLine("服务端已启用");
+            this.sers = sers;
+            semaphore = new Semaphore(sers.MaxAccept, sers.MaxAccept);//将默认配置对应上
+            Cache = new UserToKenCache(200);
+            try
+            {
+                socket.Bind(new IPEndPoint(IPAddress.Any, sers.point));//将默认配置对应上
+                socket.Listen(100);
+                StartListen(saea);
+                Console.WriteLine("服务端已启用");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
-        public void StartListen()
+        public void StartListen(SocketAsyncEventArgs saea)
         {
-            SocketAsyncEventArgs saea = new SocketAsyncEventArgs();
+            if (saea==null)
+            {
+                saea = new SocketAsyncEventArgs();
+               
+            }
+            else
+            {
+                saea.AcceptSocket = null;//初始化清空；
+            }
+
             saea.Completed += Acction;//saea.Completed回调程序，在完成监听的时候执行委托
             bool jim = socket.AcceptAsync(saea);
             //判断异步是否挂起
@@ -78,7 +114,7 @@ namespace ServerFrame
             //启动该客户端消息接收 
             use.StatrRecive();
 
-            StartListen();//重新开始监听
+            StartListen(saea);//重新开始监听
         }
 
         private void ClientClose(UserToken ut, string error)//在有错误时发的，停止客户端连接等处理
@@ -89,7 +125,12 @@ namespace ServerFrame
                 {
                     ut.CloseToken();
                 }
-                //todo 通知应用层有客户端断开
+                // 通知应用层有客户端断开
+
+                sers.Center.ClientClose(ut,error);
+
+                //回收token到缓存
+                Cache.Push(ut);
 
 
                 //一个客户端离开，信号量加1

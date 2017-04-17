@@ -45,6 +45,7 @@
     <Compile Include="ServerAgent.cs" />
     <Compile Include="ServerSetting.cs" />
     <Compile Include="UserToken.cs" />
+    <Compile Include="UserToKenCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetCommon\NetCommon.csproj">

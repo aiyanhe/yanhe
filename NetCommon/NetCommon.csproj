@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteArrary.cs" />
+    <Compile Include="DEncrypt.cs" />
     <Compile Include="LengthEncoding.cs" />
     <Compile Include="MessageEncoding.cs" />
     <Compile Include="NetModle.cs" />
