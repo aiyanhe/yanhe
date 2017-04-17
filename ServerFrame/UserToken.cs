@@ -156,9 +156,21 @@ namespace ServerFrame
                 }
             }
 
-            //todo （可选）消息的解密
+            //（可选）消息的解密
+            if (Setting.MessageDecrypt!=null)
+            {
+                bt = Setting.MessageDecrypt(bt);
+            }
 
-            //todo （可选）消息的解压
+
+
+            // （可选）消息的解压
+            if (Setting.CompressDecode!=null)
+            {
+                bt = Setting.CompressDecode(bt);
+            }
+
+
 
             // （必须）消息的解码-反序列，从二进制变成对象
             object ob;
@@ -278,8 +290,16 @@ namespace ServerFrame
                 throw new Exception("消息编码必须存在");
             }
             byte[] bt = Setting.MessageEncoad(nm);
-            //todo 消息压缩，可选
-            //todo 消息加密，可选
+            //消息压缩，可选
+            if (Setting.CompressEncode!=null)
+            {
+                bt = Setting.CompressEncode(bt);
+            }
+            // 消息加密，可选
+            if (Setting.MessageEncrypt!=null)
+            {
+                bt =Setting.MessageEncrypt(bt);
+            }
             if (Setting.LengthEncoad!=null)
             {
                 bt = Setting.LengthEncoad(bt);

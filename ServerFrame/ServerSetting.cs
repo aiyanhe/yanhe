@@ -32,5 +32,13 @@ namespace ServerFrame
        //长度编码
         public NetworkDelgate.LengthDncoad LengthDncoad;
         public NetworkDelgate.LengthEncoad LengthEncoad;
+
+       //加密，解密
+        public NetworkDelgate.MessageEncrypt MessageEncrypt;
+       public NetworkDelgate.MessageDecrypt MessageDecrypt;
+
+        //压缩，解压
+        public NetworkDelgate.CompressEncode CompressEncode;
+        public NetworkDelgate.CompressDecode CompressDecode;
     }
 }

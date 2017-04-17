@@ -1,6 +1,7 @@
 ﻿using ServerFrame;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,10 @@ namespace MyServer
             setting.LengthEncoad = LengthEncoding.Encoad;
             setting.MessageEncoad = MessageEncoding.Encoad;
             setting.MessageDncoad = MessageEncoding.Dncoad;
+            setting.MessageEncrypt = DEncrypt.Encrypt;
+            setting.MessageDecrypt = DEncrypt.Decrypt;
+            setting.CompressEncode = CompressEncoding.Encode;
+            setting.CompressDecode = CompressEncoding.Decode;
             setting.Center = new HandlerCenter();
             UserToken.Setting = setting;
             server.StartServer(setting);
@@ -26,7 +31,21 @@ namespace MyServer
 
         static void Main(string[] args)
         {
-            SettingServer();
+            //SettingServer();
+            string inFile = @"C:\Users\爱言和\Desktop\Text\xxx02.txt";
+            string outFile = @"C:\Users\爱言和\Desktop\Text\aiyanhe.txt";
+            FileStream fileStream = File.Open(inFile, FileMode.Open);
+            FileStream outStream = File.Open(outFile, FileMode.Create);
+            //解密
+            byte[] bt= new byte[fileStream.Length];
+            fileStream.Read(bt,0,bt.Length);
+             byte[] ht = DEncrypt.Decrypt(bt);
+            //解压
+             byte[] lt = CompressEncoding.Decode(ht);
+            outStream.Write(lt,0,lt.Length);
+            outStream.Flush();
+            fileStream.Close();
+            outStream.Close();
             Console.ReadKey();
 
         }
