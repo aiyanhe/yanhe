@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{408F8D3F-0F1E-4858-B168-138772A92778}</ProjectGuid>
+    <ProjectGuid>{FE0F046A-4B3F-472C-B078-228186F6930D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetCommon</RootNamespace>
-    <AssemblyName>NetCommon</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>MyProtocol</RootNamespace>
+    <AssemblyName>MyProtocol</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\Statr\Assets\Script\ScoketRoom\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,38 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ByteArrary.cs" />
-    <Compile Include="CompressEncoding.cs" />
-    <Compile Include="DEncrypt.cs" />
-    <Compile Include="LengthEncoding.cs" />
-    <Compile Include="MessageEncoding.cs" />
-    <Compile Include="NetModle.cs" />
-    <Compile Include="NetworkDelgate.cs" />
+    <Compile Include="Common\ErrorCode.cs" />
+    <Compile Include="Dto\AccountDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SevenZip\Common\CommandLineParser.cs" />
-    <Compile Include="SevenZip\Common\CRC.cs" />
-    <Compile Include="SevenZip\Common\InBuffer.cs" />
-    <Compile Include="SevenZip\Common\OutBuffer.cs" />
-    <Compile Include="SevenZip\Compress\LzmaAlone\LzmaAlone.cs" />
-    <Compile Include="SevenZip\Compress\LzmaAlone\LzmaBench.cs" />
-    <Compile Include="SevenZip\Compress\LZMA\LzmaBase.cs" />
-    <Compile Include="SevenZip\Compress\LZMA\LzmaDecoder.cs" />
-    <Compile Include="SevenZip\Compress\LZMA\LzmaEncoder.cs" />
-    <Compile Include="SevenZip\Compress\LZ\IMatchFinder.cs" />
-    <Compile Include="SevenZip\Compress\LZ\LzBinTree.cs" />
-    <Compile Include="SevenZip\Compress\LZ\LzInWindow.cs" />
-    <Compile Include="SevenZip\Compress\LZ\LzOutWindow.cs" />
-    <Compile Include="SevenZip\Compress\RangeCoder\RangeCoder.cs" />
-    <Compile Include="SevenZip\Compress\RangeCoder\RangeCoderBit.cs" />
-    <Compile Include="SevenZip\Compress\RangeCoder\RangeCoderBitTree.cs" />
-    <Compile Include="SevenZip\ICoder.cs" />
+    <Compile Include="Protol\CommonProtocol.cs" />
+    <Compile Include="Protol\LoginProtocl.cs" />
+    <Compile Include="Protol\MyProtocol.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MyProtocol\MyProtocol.csproj">
-      <Project>{fe0f046a-4b3f-472c-b078-228186f6930d}</Project>
-      <Name>MyProtocol</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

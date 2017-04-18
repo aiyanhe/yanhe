@@ -3,32 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyProtocol;
 
 namespace NetCommon
 {
-    /// <summary>
-    /// 消息的编码模式
-    /// </summary>
-    public enum Protocol : byte
-    {
-        /// <summary>
-        /// 通用
-        /// </summary>
-        Common,
-        /// <summary>
-        /// 登录
-        /// </summary>
-        Login,
-        /// <summary>
-        /// 背包
-        /// </summary>
-        BackPack
 
-    }
     /// <summary>
-    /// 消息的模块
+    /// 消息的模块，如模块号Protocol Type，命令号，当前子模块下的不同命令short Command，息体，当前协议对应的消息数据Object Message
     /// </summary>
-    public  class NetModle
+    public class NetModle
     {
         /// <summary>
         /// 模块号

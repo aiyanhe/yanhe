@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HandlerCenter.cs" />
+    <Compile Include="Logic\IHander.cs" />
+    <Compile Include="Logic\LogicHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +53,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyProtocol\MyProtocol.csproj">
+      <Project>{fe0f046a-4b3f-472c-b078-228186f6930d}</Project>
+      <Name>MyProtocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetCommon\NetCommon.csproj">
       <Project>{408f8d3f-0f1e-4858-b168-138772a92778}</Project>
       <Name>NetCommon</Name>
