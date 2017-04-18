@@ -103,13 +103,14 @@ namespace ServerFrame
         {
             Console.WriteLine("有客户端连接上来了");
             // 保存客户信息 
-            UserToken use = new UserToken();
+            UserToken use = Cache.Pop();
             use.CloseProcess = ClientClose;
             use.socket = saea.AcceptSocket;
             
             //信号量减一 
             semaphore.WaitOne();
-            //TODO  通知应用层有客户端计接入 
+            // 通知应用层有客户端计接入 
+            sers.Center.ClientAccept(use);
 
             //启动该客户端消息接收 
             use.StatrRecive();
