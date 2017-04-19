@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using MyProtocol;
+using MyServer.Cache;
 using ServerFrame;
 
 namespace MyServer.Biz
@@ -13,6 +10,7 @@ namespace MyServer.Biz
     /// </summary>
     public  class AccoutBiz:IBiz
     {
+        AccountCache accountCache = CacheManager.Get<AccountCache>();
         /// <summary>
         /// 创建账号
         /// </summary>
@@ -20,6 +18,7 @@ namespace MyServer.Biz
         /// <param name="dto"></param>
         public void Create(UserToken token , AccountDto dto)
         {
+           
             //验证账号密码的合法性
             if (string.IsNullOrEmpty(dto.Account)||string.IsNullOrEmpty(dto.Password))
             {
@@ -34,9 +33,15 @@ namespace MyServer.Biz
             ExUserToken.Send(token,ErrorCode.AccountPasswordIsNotSafe);
                 return;
             }
-            //todo 验证账号是否被注册，需要调用缓存层进行验证
+            //验证账号是否被注册，需要调用缓存层进行验证
+            if (accountCache.HasAccount(dto.Account))
+            {
+                token.Send(ErrorCode.AccountHasRegister);
+                return;
+            }
 
-            //todo  调用缓存层创建账号
+            //调用缓存层创建账号
+            accountCache.Add(token,dto);
 
             //通知客户端注册账号成功
             token.Send(Protocol.Login,LoginProtocol.S2C_Login);
@@ -57,12 +62,25 @@ namespace MyServer.Biz
             {
                 return ErrorCode.AccountPasswordIsNotSafe;
             }
-            //todo 验证账号是否注册
+            //验证账号是否注册
+            if (!accountCache.HasAccount(account))
+            {
+                return ErrorCode.NotHasAccount;
+            }
             
-            //todo 验证是否已经登录
-            //todo 验证账号密码是否匹配
-            //todo 上线
-
+            //验证是否已经登录
+            if (accountCache.IsOnline(token))
+            {
+                return  ErrorCode.HasLogin;
+            }
+            //验证账号密码是否匹配
+            if (!accountCache.Matching(account,password))
+            {
+                return ErrorCode.NotMatch;
+            }
+            //上线
+            accountCache.Online(token,account);
+            return ErrorCode.Success;
         }
 
 

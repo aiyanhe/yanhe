@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyServer.Cache
 {
-    class ICache
+    public interface ICache
     {
     }
 }

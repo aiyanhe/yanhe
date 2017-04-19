@@ -19,6 +19,9 @@ namespace MyServer
     /// </summary>
     class LogicHandler : IHander
     {
+        /// <summary>
+        /// 通过biz管理器声明的子biz AccoutBiz类
+        /// </summary>
         private AccoutBiz accoutBiz = BizManager.Get<AccoutBiz>();
         /// <summary>
         /// 获取当前协议Protocol的子模块
@@ -67,9 +70,17 @@ namespace MyServer
         {
             ExecutorManager.Execute(() =>
             {
-
-
-
+                ErrorCode error = accoutBiz.Login(token, accountDto.Account, accountDto.Password);
+                if (error== ErrorCode.Success)
+                {
+                    //通知用户登录成功
+                    token.Send(Protocol.Login,LoginProtocol.S2C_Login);
+                }
+                else
+                {
+                    //把错误代码发给用户
+                    token.Send(error);
+                }
 
             });
 
@@ -82,7 +93,10 @@ namespace MyServer
         /// <param name="accountDto"></param>
         private void Register(UserToken token, AccountDto accountDto)
         {
-            throw new NotImplementedException();
+            ExecutorManager.Execute(() =>
+            {
+               accoutBiz.Create(token,accountDto);
+            });
         }
 
  
