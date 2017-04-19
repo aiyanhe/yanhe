@@ -43,6 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Biz\AccoutBiz.cs" />
+    <Compile Include="Biz\BizManager.cs" />
+    <Compile Include="Biz\IBiz.cs" />
+    <Compile Include="Cache\AccountCache.cs" />
+    <Compile Include="Cache\CacheManager.cs" />
+    <Compile Include="Cache\ICache.cs" />
+    <Compile Include="Common\Tools\ExecutorManager.cs" />
+    <Compile Include="Common\Tools\ExUserToken.cs" />
     <Compile Include="HandlerCenter.cs" />
     <Compile Include="Logic\IHander.cs" />
     <Compile Include="Logic\LogicHandler.cs" />
@@ -66,6 +74,7 @@
       <Name>ServerFrame</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using MyProtocol;
+using MyServer;
+using MyServer.Common.Tools;
 using NetCommon;
 using ServerFrame;
+using MyServer.Biz;
 
 namespace MyServer
 {
+    
     /// <summary>
     /// 逻辑处理模块，处理接口IHander
     /// </summary>
     class LogicHandler : IHander
     {
+        private AccoutBiz accoutBiz = BizManager.Get<AccoutBiz>();
         /// <summary>
         /// 获取当前协议Protocol的子模块
         /// </summary>
@@ -40,16 +46,45 @@ namespace MyServer
             switch (modle.Command)//根据当前用户的消息模块的命令号
             {
                 case LoginProtocol.C2S_Login:
-                    //todo Login
-                    Console.WriteLine("登入功能。。。。未完成");
-
+                    //Login
+                    //Console.WriteLine("登入功能。。。。未完成");
+                    Login(token,modle.GetMessage<AccountDto>());
                 break;
                 case LoginProtocol.C2S_Register:
-                    //todo Reister
-                    Console.WriteLine("注册功能。。。。未完成");
+                    //Reister
+                    //Console.WriteLine("注册功能。。。。未完成");
+                    Register(token,modle.GetMessage<AccountDto>());
                     break;
                     
             }
         }
+        /// <summary>
+        /// 登录，需要客户端和用户的账号密码信息 UserToken和AccountDto
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="accountDto"></param>
+        private void Login(UserToken token, AccountDto accountDto)
+        {
+            ExecutorManager.Execute(() =>
+            {
+
+
+
+
+            });
+
+
+        }
+        /// <summary>
+        /// 注册，需要客户端和用户的账号密码信息 UserToken和AccountDto
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="accountDto"></param>
+        private void Register(UserToken token, AccountDto accountDto)
+        {
+            throw new NotImplementedException();
+        }
+
+ 
     }
 }
