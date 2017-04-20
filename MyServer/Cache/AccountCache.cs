@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Maticsoft;
 using MyProtocol;
 using ServerFrame;
 
@@ -11,21 +12,21 @@ namespace MyServer.Cache
     /// <summary>
     /// 用户信息
     /// </summary>
-    public class ACCOUNT
-    {
-        /// <summary>
-        /// 用户ID
-        /// </summary>
-        public int id;
-        /// <summary>
-        /// 用户账号
-        /// </summary>
-        public string account;
-        /// <summary>
-        /// 用户密码
-        /// </summary>
-        public string password;
-    }
+    //public class ACCOUNT
+    //{
+    //    /// <summary>
+    //    /// 用户ID
+    //    /// </summary>
+    //    public int id;
+    //    /// <summary>
+    //    /// 用户账号
+    //    /// </summary>
+    //    public string account;
+    //    /// <summary>
+    //    /// 用户密码
+    //    /// </summary>
+    //    public string password;
+    //}
     /// <summary>
     /// 账号缓存数据
     /// </summary>
@@ -46,12 +47,14 @@ namespace MyServer.Cache
         /// <param name="dto"></param>
         public void Add(UserToken token, AccountDto dto)
         {
-            ACCOUNT account = new ACCOUNT();
-            account.account = dto.Account;
-            account.password = dto.Password;
+            ACCOUNT a = new ACCOUNT();
+            a.account = dto.Account;
+            a.password = dto.Password;
 
-            //todo 写入数据库
-            dicAccounts.Add(dto.Account,account);//将用户信息添加到用户信息字典中
+            //写入数据库
+            a.id = a.GetMaxId();
+            a.Add();
+            dicAccounts.Add(dto.Account,a);//将用户信息添加到用户信息字典中
         }
 
         /// <summary>

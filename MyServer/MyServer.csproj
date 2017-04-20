@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>D:\Codematic2\Template\CodematicDemoF3\Lib\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,6 +54,8 @@
     <Compile Include="Cache\ICache.cs" />
     <Compile Include="Common\Tools\ExecutorManager.cs" />
     <Compile Include="Common\Tools\ExUserToken.cs" />
+    <Compile Include="Dao\DbHelperMySQL.cs" />
+    <Compile Include="Dao\Model\ACCOUNT.cs" />
     <Compile Include="HandlerCenter.cs" />
     <Compile Include="Logic\IHander.cs" />
     <Compile Include="Logic\LogicHandler.cs" />
@@ -74,7 +79,6 @@
       <Name>ServerFrame</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
