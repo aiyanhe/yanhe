@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using MyProtocol;
+using MyProtocol.Protol;
 using NetCommon;
 using ServerFrame;
 

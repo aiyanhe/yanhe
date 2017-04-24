@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyProtocol;
+using MyProtocol.Common;
+using MyProtocol.Protol;
 using NetCommon;
 using ServerFrame;
 
