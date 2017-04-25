@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetCommon
+﻿namespace NetCommon
 {
-   public class MessageEncoding
+    public class MessageEncoding
     {
         /// <summary>
         /// 序列化，消息编码

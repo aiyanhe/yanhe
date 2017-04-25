@@ -21,10 +21,10 @@ namespace MyServer
             setting.LengthEncoad = LengthEncoding.Encoad;
             setting.MessageEncoad = MessageEncoding.Encoad;
             setting.MessageDncoad = MessageEncoding.Dncoad;
-            //setting.MessageEncrypt = DEncrypt.Encrypt;
-            //setting.MessageDecrypt = DEncrypt.Decrypt;
-            //setting.CompressEncode = CompressEncoding.Encode;
-            //setting.CompressDecode = CompressEncoding.Decode;
+            setting.MessageEncrypt = DEncrypt.Encrypt;
+            setting.MessageDecrypt = DEncrypt.Decrypt;
+            setting.CompressEncode = CompressEncoding.Encode;
+            setting.CompressDecode = CompressEncoding.Decode;
             setting.Center = new HandlerCenter();
             UserToken.Setting = setting;
             server.StartServer(setting);

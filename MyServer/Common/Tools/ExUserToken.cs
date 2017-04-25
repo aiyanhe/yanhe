@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MyProtocol;
-using MyProtocol.Common;
-using MyProtocol.Protol;
+﻿using MyProtocol;
 using NetCommon;
 using ServerFrame;
 
-    /// <summary>
-    /// 扩展UserToken的类
-    /// </summary>
-    public static class ExUserToken
+/// <summary>
+/// 扩展UserToken的类
+/// </summary>
+public static class ExUserToken
     {
     //c#参数带this
     //这是 .NET 3.0 之后新增的一种特性，叫“扩展方法”。
