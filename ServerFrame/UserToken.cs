@@ -13,6 +13,9 @@ namespace ServerFrame
     /// </summary>
    public class UserToken
     {
+       /// <summary>
+       /// 用来承载远端用户的ip等信息
+       /// </summary>
         public Socket socket;
 
         /// <summary>

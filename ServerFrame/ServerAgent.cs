@@ -84,7 +84,8 @@ namespace ServerFrame
             }
 
             saea.Completed += Acction;//saea.Completed回调程序，在完成监听的时候执行委托
-            bool jim = socket.AcceptAsync(saea);
+            bool jim = socket.AcceptAsync(saea);//SocketAsyncEventArgs会获取远端信息，如ip和端口号
+            
             //判断异步是否挂起
             //true   挂起监听，如果挂起表示我们没有立刻收到客户端的链接，需要等待客户端接入进来，通过事件通知服务器有客户端接入进来
             //false  没有挂起，没有挂起表示我们立刻收到了客户端链接，处理客户端链接，保存客户端链接信息，继续开始监听客户端的监听,不会执行saea.Completed这个回调程序，所以需要自己手动执行
@@ -97,6 +98,8 @@ namespace ServerFrame
 
         private void Acction(object sender, SocketAsyncEventArgs e)
         {
+            Console.WriteLine(sender);
+            Console.WriteLine(e);
             ListenTheUser(e);
         }
         public void ListenTheUser(SocketAsyncEventArgs saea)
@@ -118,7 +121,7 @@ namespace ServerFrame
             StartListen(saea);//重新开始监听
         }
 
-        private void ClientClose(UserToken ut, string error)//在有错误时发的，停止客户端连接等处理
+        private void ClientClose(UserToken ut, string error)//在有错误时触发的，停止客户端连接等处理
         {
             if (ut!=null)
             {
