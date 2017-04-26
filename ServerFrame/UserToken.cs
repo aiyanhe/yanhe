@@ -52,7 +52,7 @@ namespace ServerFrame
         public bool isSend = false;
 
         /// <summary>
-        /// 服务器默认配置声明的对象
+        /// 服务器默认配置声明的对象(其实是给所有客户端配置好解码器等工具)
         /// </summary>
         public static ServerSetting Setting;
 
@@ -189,14 +189,14 @@ namespace ServerFrame
 
         }
         /// <summary>
-        /// 开始挂起监听
+        /// 开始挂起监听,供上层调用客户端的接收消息方法
         /// </summary>
         public void StatrRecive()
         {
             try
             {
                 Console.WriteLine("开启用户{0}接收数据",socket.RemoteEndPoint);
-                bool t = socket.ReceiveAsync(ReceSAEA);//ReceiveAsync 开始一个异步请求以便从连接的 System.Net.Sockets.Socket 对象中接收数据。
+                bool t = socket.ReceiveAsync(ReceSAEA);//ReceiveAsync 开始一个异步请求以便从连接的 System.Net.Sockets.Socket 对象中接收数据。这里线程会阻塞；
                 if (!t)
                 {
                     ProcessRece(ReceSAEA);
@@ -251,6 +251,7 @@ namespace ServerFrame
         /// </summary>
         private void StartSend()
         {
+            
             bool s = socket.SendAsync(SendSAEA);//SendAsync 将数据异步发送到连接的 System.Net.Sockets.Socket 对象。
             if (!s)
             {
