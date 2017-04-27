@@ -3,7 +3,7 @@
 namespace MyProtocol
 {
     [Serializable]
-   public   class AccountDto
+   public class AccountDto
     {
         /// <summary>
         /// 用户名

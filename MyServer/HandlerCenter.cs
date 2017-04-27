@@ -10,7 +10,7 @@ namespace MyServer
     class HandlerCenter:AbsHandlerCenter
     {
         /// <summary>
-        /// 键为协议，值为处理协议接口的字典
+        /// 储存<协议，协议对应的模块>的字典，是一一对应的
         /// </summary>
         Dictionary<Protocol,IHander> dicHandlers =new Dictionary<Protocol, IHander>();
 
@@ -21,7 +21,7 @@ namespace MyServer
         #region 逻辑处理模块的管理
 
         /// <summary>
-        /// 确定字典有该模块的协议Protocol
+        /// 往字典添加指定的IHander值
         /// </summary>
         /// <typeparam name="T"></typeparam>
         private void Addhandler<T>() where T:IHander,new()
@@ -34,7 +34,7 @@ namespace MyServer
             dicHandlers.Add(handler.Protocol,handler);
         }
         /// <summary>
-        /// 通过字典根据协议得到处理接口
+        /// 根据指定协议在字典找到对应的IHander
         /// </summary>
         /// <param name="protocol"></param>
         /// <returns></returns>
