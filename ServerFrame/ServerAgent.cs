@@ -84,7 +84,7 @@ namespace ServerFrame
             }
 
             saea.Completed += Acction;//saea.Completed回调程序，在完成监听的时候执行委托
-            bool jim = socket.AcceptAsync(saea);//这里线程不会阻塞
+            bool jim = socket.AcceptAsync(saea);//这里线程不会阻塞，但异步线程正在等待用户接入，等到用户接入时，就会调用saea.Completed;
             //判断异步是否挂起
             //true   挂起监听，如果挂起表示我们没有立刻收到客户端的链接，（假阻塞）需要等待客户端接入进来，通过Completed事件通知服务器有客户端接入进来
             //false  没有挂起，没有挂起表示我们立刻收到了客户端链接,不会执行saea.Completed这个回调程序，所以需要自己手动执行
