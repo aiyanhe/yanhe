@@ -88,7 +88,7 @@ namespace ServerFrame
             //判断异步是否挂起
             //true   挂起监听，如果挂起表示我们没有立刻收到客户端的链接，（假阻塞）需要等待客户端接入进来，通过Completed事件通知服务器有客户端接入进来
             //false  没有挂起，没有挂起表示我们立刻收到了客户端链接,不会执行saea.Completed这个回调程序，所以需要自己手动执行
-            if (!jim)
+            if (!jim)//取反，如果jim为true,这里就为false条件，反之为true条件；因为当jim为false时，需要执行下面方法；但是只有if(ture)才会执行，这里就绕了一下；相当于if(jim==false){};
             {
                 ListenTheUser(saea);//同步完成
             }
